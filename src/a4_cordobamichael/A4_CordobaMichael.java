@@ -23,45 +23,62 @@ public class A4_CordobaMichael {
         double[] hwGrades = new double[classSize];
         double[] studentTotal = new double[classSize];
         String[] letterGrade = new String[classSize];
+        double maxHW;
+        double maxExam;
+        double maxTotal;
                 
         System.out.println("Exam \t HW\t\tTotal\t\tGrade");
         
         for(int i = 0; i < classSize; i++){
-            examGrades[i] = computeGrade(200);
-            hwGrades[i] = computeGrade(100);
+            examGrades[i] = rnd.nextInt(200);
+            hwGrades[i] = rnd.nextInt(100);
             
-            studentTotal[i] = (75 * (examGrades[i]/200) + (25 * (hwGrades[i]/100)));
+            studentTotal[i] = computeGrade(examGrades[i], hwGrades[i]);
             
-            if (studentTotal[i] < 80){
-               if (studentTotal[i] > 60){
-                   letterGrade[i] = "B";
-               }
-               else{
-                   letterGrade[i] = "C";
-               }
-            }
-            else{
-                letterGrade[i] = "A";
-            }
-            
+            letterGrade[i] = computeLetter(studentTotal[i]);
+                            
             System.out.printf("%.0f \t %.0f\t\t%.2f\t\t%5s\n", examGrades[i], hwGrades[i], studentTotal[i], letterGrade[i]);
                         
         }
-        System.out.println();
         
-        System.out.printf("Exam max: %.0f\n", computeMax(examGrades));
-        System.out.printf("HW max: %.0f\n", computeMax(hwGrades));
-        System.out.printf("Total max: %.2f\n", computeMax(studentTotal));
+        maxExam = computeMax(examGrades);
+        maxHW = computeMax(hwGrades);
+        maxTotal = computeMax(studentTotal);
+               
+        System.out.println();
+              
+        System.out.printf("Exam max: %.0f\n", maxExam);
+        System.out.printf("HW max: %.0f\n", maxHW);
+        System.out.printf("Total max: %.2f\n", maxTotal);
   
     }
     
     
-    public static double computeGrade(int range){
-        int grade;
+    public static double computeGrade(double exam, double hw){
+        double grade;
         
-        grade = rnd.nextInt(range);
+        grade = (75 * exam/200) + (50 * hw/100);
         
         return grade;
+        
+    }
+    
+    public static String computeLetter(double total){
+        String letter;
+        
+        if (total < 80){
+               if (total > 60){
+                   letter = "B";
+               }
+               else{
+                   letter = "C";
+               }
+            }
+            else{
+                letter = "A";
+        }
+        
+        return letter;
         
     }
     
