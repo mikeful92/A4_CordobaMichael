@@ -1,3 +1,5 @@
+//Created February 15th, 2015
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,19 +7,18 @@
  */
 package a4_cordobamichael;
 
-import java.util.Random;
 
 /**
  *
  * @author Michael
  */
 public class A4_CordobaMichael {
-    static Random rnd = new Random();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        java.util.Random rnd = new java.util.Random( );
         int classSize = 11;
         double[] examGrades = new double[classSize];
         double[] hwGrades = new double[classSize];
@@ -30,8 +31,8 @@ public class A4_CordobaMichael {
         System.out.println("Exam \t HW\t\tTotal\t\tGrade");
         
         for(int i = 0; i < classSize; i++){
-            examGrades[i] = rnd.nextInt(200);
-            hwGrades[i] = rnd.nextInt(100);
+            examGrades[i] = rnd.nextInt(201);
+            hwGrades[i] = rnd.nextInt(101);
             
             studentTotal[i] = computeGrade(examGrades[i], hwGrades[i]);
             
@@ -57,17 +58,27 @@ public class A4_CordobaMichael {
     public static double computeGrade(double exam, double hw){
         double grade;
         
-        grade = (75 * exam/200) + (50 * hw/100);
+        grade = (75 * exam/200) + (25 * hw/100);
         
-        return grade;
-        
+        return grade;        
     }
     
+        public static double computeMax(double[] list){
+        double max = 0;
+        
+        for(int i = 0; i < list.length; i++){
+            if (list[i] > max){
+                max = list[i];
+            }
+        }
+        return max;
+    }
+        
     public static String computeLetter(double total){
         String letter;
         
         if (total < 80){
-               if (total > 60){
+               if (total >= 60){
                    letter = "B";
                }
                else{
@@ -82,14 +93,4 @@ public class A4_CordobaMichael {
         
     }
     
-    public static double computeMax(double[] list){
-        double max = 0;
-        
-        for(int i = 0; i < list.length; i++){
-            if (list[i] > max){
-                max = list[i];
-            }
-        }
-        return max;
-    }
 }
